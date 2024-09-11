@@ -29,10 +29,10 @@ returnString frequency value
     | otherwise          = ' '
 
 createLine :: Int -> [Int] -> String
-createLine freq frequencyList = map (\x -> returnString freq x ) frequencyList
+createLine freq frequencyList = map (\x -> returnString freq x ) frequencyList ++ "\n"
 
 toString :: [Int] -> String
-toString frequencyList = (concat . reverse) (map (\frequency -> (createLine frequency frequencyList) ++ "\n") [1..(maximum frequencyList)])
+toString frequencyList = (concat . reverse) (map (\frequency -> createLine frequency frequencyList) [1..(maximum frequencyList)])
 
 
 histogram :: [Int] -> String
