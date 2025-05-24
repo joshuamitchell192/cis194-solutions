@@ -27,3 +27,8 @@ moreFun (GL employeeListA funA) (GL employeeListB funB)
     | funA == funB = GL employeeListA funA
     | funA < funB = GL employeeListB funB
 
+-- Exercise 2
+treeFold :: (a -> [b] -> b) -> Tree a -> b
+treeFold f (Node { rootLabel, subForest }) = f rootLabel (map (treeFold f) subForest)
+
+
