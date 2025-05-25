@@ -3,6 +3,8 @@ module Party where
 import Employee
 import Data.Tree
 import Prelude
+import Data.List (sortBy, sort)
+import Data.Ord (comparing)
 
 -- Exercise 1
 
@@ -63,14 +65,26 @@ maxFun :: Tree Employee -> GuestList
 maxFun employeeTree =
     uncurry moreFun (treeFold nextLevel employeeTree)
 
+-- Exercise 5
 main :: IO ()
 main = do
     fileContents <- readFile "./company.txt"
 
-    let companyTree = read fileContents :: Tree Employee
+    let companyTree :: Tree Employee = read fileContents
 
     let resultGL = maxFun companyTree
 
     let GL employees funScore = resultGL
 
     putStrLn $ "Fun Score: " ++ show funScore
+
+    let sortedEmployees = sortBy (comparing sortKey) employees
+          where
+            -- Define a sorting key as a tuple of (firstName, fullName)
+            sortKey e = (firstName e, empName e)
+            -- Extract the first name (first word of empName)
+            firstName e = case words (empName e) of
+                              (fn:_) -> fn
+                              []     -> ""
+    
+    mapM_ (putStrLn . empName) sortedEmployees
