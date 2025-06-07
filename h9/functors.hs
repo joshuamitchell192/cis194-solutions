@@ -25,9 +25,21 @@ instance Functor (Either a) where
 ghci> :k Maybe
 Maybe :: * -> *
 
+-- Maybe and others with a kind of * -> * can be thought of as a function on types, or more commonly called, a type constructor.
+
 ghci> :k Maybe Int
 Maybe Int :: *
 
 ghci> :k Either
 Either :: * -> * -> *
+
+-- 
+instance Functor IO where
+  fmap f ioa = ioa >>= (\a -> return (f a))
+
+instance Functor ((->) e) where
+    fmap :: (a -> b) -> (e -> a) -> (e -> b) -- -> is infixed
+    fmap = (.)
+    -- Equates to functions composition where a function is applied to get a and then another function to get a to b.
+    -- This results in the output of the composed function e -> b.
 
