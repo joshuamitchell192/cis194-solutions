@@ -20,3 +20,14 @@ instance Functor (Either a) where
 
 -- Either only applies to the second argument because Functors require a kind of * -> *.
 -- If f was applied to a, then a and b would have to be the same type since the f would be applied to both, so a must stay the same.
+
+-- Kinds
+ghci> :k Maybe
+Maybe :: * -> *
+
+ghci> :k Maybe Int
+Maybe Int :: *
+
+ghci> :k Either
+Either :: * -> * -> *
+
