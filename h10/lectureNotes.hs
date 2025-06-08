@@ -1,4 +1,4 @@
-import qualified Control.Applicative as time
+import qualified Control.Applicative
 type Name = String
 
 data Employee = Employee { name    :: Name
@@ -42,7 +42,7 @@ class Functor f =>  Applicative f where
     liftA3 h fa fb fc = ((h <$> fa) <*> fb) <*> fc
 
 -- Applicative Laws
-f `fmap` x === pure f <*> x
+-- f `fmap` x === pure f <*> x
 
 -- Examples
 
